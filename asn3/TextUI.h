@@ -9,19 +9,18 @@ private:
 	//BankMember::UserType currUserType;
 	//Database will be a member eventually
 	Bank bank;
-    bool bLogging;
+	bool bLogging;
 	bool bShutdown;
 
 public:
 	TextUI();
-    TextUI(bool logging);
 	~TextUI();
 	void displayHeader();
+	void readFromBase();
 	BankMember* setupFirstMaintainer();
 	BankMember* setupFirstManager();
 	
 	bool processTransaction();
-
 	bool getShutdownStatus();
 
 private:
@@ -45,6 +44,7 @@ private:
 	bool processMaintainerTransaction(BankMaintainer* user);
 	bool enableLogging();
 	bool printLogs();
+	bool removeLogs();
 	bool shutdown();
 
 	//Client functions
@@ -58,3 +58,4 @@ private:
 	long removeMoneyFromSavings(BankClient* client, long amount);
 
 };
+
