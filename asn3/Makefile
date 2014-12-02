@@ -1,9 +1,9 @@
 all: main
 
-main: main.o Bank.o BankAccount.o BankMember.o BankMemberDatabase.o BankProfile.o IdManager.o BankManager.o BankClient.o IdManager.o BankMaintainer.o TextUI.o InputParser.o 
-	g++ main.o Bank.o BankAccount.o BankMember.o BankMemberDatabase.o BankProfile.o IdManager.o BankManager.o BankClient.o BankMaintainer.o TextUI.o InputParser.o -o main
+main: main.o Bank.o BankAccount.o BankMember.o BankMemberDatabase.o BankProfile.o IdManager.o BankManager.o BankClient.o IdManager.o BankMaintainer.o TextUI.o InputParser.o debug.o 
+	g++ main.o Bank.o BankAccount.o BankMember.o BankMemberDatabase.o BankProfile.o IdManager.o BankManager.o BankClient.o BankMaintainer.o TextUI.o InputParser.o debug.o -o main
 
-main.o: main.cpp BankMember.h TextUI.h
+main.o: main.cpp TextUI.h
 	g++ -c main.cpp
 
 Bank.o: Bank.cpp Bank.h BankManager.h BankMaintainer.h BankClient.h IdManager.h BankMemberDatabase.h
@@ -18,9 +18,6 @@ BankMember.o: BankMember.cpp BankMember.h
 BankMemberDatabase.o: BankMemberDatabase.cpp BankMember.h BankClient.h BankManager.h BankMaintainer.h IdManager.h BankMemberDatabase.h
 	g++ -c BankMemberDatabase.cpp
 
-BankProfile.o: BankProfile.h
-	g++ -c BankProfile.cpp
-
 BankClient.o: BankAccount.h BankMember.h IdManager.h BankClient.h BankClient.cpp
 	g++ -c BankClient.cpp 
 
@@ -33,11 +30,17 @@ IdManager.o: IdManager.cpp IdManager.h BankMember.h BankAccount.h
 InputParser.o: InputParser.cpp InputParser.h
 	g++ -c InputParser.cpp
 
-TextUI.o: TextUI.cpp Bank.h BankMember.h TextUI.h BankClient.h BankMaintainer.h BankManager.h BankMemberDatabase.h
+TextUI.o: TextUI.cpp Bank.h BankMember.h TextUI.h BankClient.h BankMaintainer.h BankManager.h BankMemberDatabase.h debug.h
 	g++ -c TextUI.cpp
 
 BankMaintainer.o: BankMaintainer.cpp BankMember.h BankMaintainer.h
 	g++ -c BankMaintainer.cpp
+
+debug.o: debug.cpp debug.h
+	g++ -c debug.cpp
+
+BankProfile.o: BankProfile.cpp BankProfile.h
+	g++ -c BankProfile.cpp
 
 clean:
 	rm -rf *o main
